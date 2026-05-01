@@ -4,6 +4,6 @@
  */
 component {
 
-	abort;
+    abort;
 
 }
