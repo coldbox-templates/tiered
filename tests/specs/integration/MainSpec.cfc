@@ -16,90 +16,86 @@
  *******************************************************************************/
 component extends="coldbox.system.testing.BaseTestCase" appMapping="/app" {
 
-	/*********************************** LIFE CYCLE Methods ***********************************/
+    /*********************************** LIFE CYCLE Methods ***********************************/
 
-	function beforeAll(){
-		super.beforeAll();
-		// do your own stuff here
-	}
+    function beforeAll() {
+        super.beforeAll();
+        // do your own stuff here
+    }
 
-	function afterAll(){
-		// do your own stuff here
-		super.afterAll();
-	}
+    function afterAll() {
+        // do your own stuff here
+        super.afterAll();
+    }
 
-	/*********************************** BDD SUITES ***********************************/
+    /*********************************** BDD SUITES ***********************************/
 
-	function run(){
-		describe( "Main Handler", function(){
-			beforeEach( function( currentSpec ){
-				// Setup as a new ColdBox request, VERY IMPORTANT. ELSE EVERYTHING LOOKS LIKE THE SAME REQUEST.
-				setup();
-			} );
+    function run() {
+        describe('Main Handler', function() {
+            beforeEach(function(currentSpec) {
+                // Setup as a new ColdBox request, VERY IMPORTANT. ELSE EVERYTHING LOOKS LIKE THE SAME REQUEST.
+                setup();
+            });
 
-			it( "can render the homepage", function(){
-				var event = this.get( "main.index" );
-				expect( event.getValue( name = "welcomemessage", private = true ) ).toBe( "Welcome to ColdBox!" );
-			} );
+            it('can render the homepage', function() {
+                var event = this.get('main.index');
+                expect(event.getValue(name = 'welcomemessage', private = true)).toBe('Welcome to ColdBox!');
+            });
 
-			it( "can render some restful data", function(){
-				var event = this.post( "main.data" );
+            it('can render some restful data', function() {
+                var event = this.post('main.data');
 
-				debug( event.getHandlerResults() );
-				expect( event.getRenderedContent() ).toBeJSON();
-			} );
+                debug(event.getHandlerResults());
+                expect(event.getRenderedContent()).toBeJSON();
+            });
 
-			it( "can do a relocation", function(){
-				var event = execute( event = "main.doSomething" );
-				expect( event.getValue( "relocate_event", "" ) ).toBe( "main.index" );
-			} );
+            it('can do a relocation', function() {
+                var event = execute(event = 'main.doSomething');
+                expect(event.getValue('relocate_event', '')).toBe('main.index');
+            });
 
-			it( "can startup executable code", function(){
-				var event = execute( "main.onAppInit" );
-			} );
+            it('can startup executable code', function() {
+                var event = execute('main.onAppInit');
+            });
 
-			it( "can handle exceptions", function(){
-				// You need to create an exception bean first and place it on the request context FIRST as a setup.
-				var exceptionBean = createMock( "coldbox.system.web.context.ExceptionBean" ).init(
-					erroStruct   = structNew(),
-					extramessage = "My unit test exception",
-					extraInfo    = "Any extra info, simple or complex"
-				);
-				prepareMock( getRequestContext() )
-					.setValue(
-						name    = "exception",
-						value   = exceptionBean,
-						private = true
-					)
-					.$( "setHTTPHeader" );
+            it('can handle exceptions', function() {
+                // You need to create an exception bean first and place it on the request context FIRST as a setup.
+                var exceptionBean = createMock('coldbox.system.web.context.ExceptionBean').init(
+                    erroStruct = structNew(),
+                    extramessage = 'My unit test exception',
+                    extraInfo = 'Any extra info, simple or complex'
+                );
+                prepareMock(getRequestContext())
+                    .setValue(name = 'exception', value = exceptionBean, private = true)
+                    .$('setHTTPHeader');
 
-				// TEST EVENT EXECUTION
-				var event = execute( "main.onException" );
-			} );
+                // TEST EVENT EXECUTION
+                var event = execute('main.onException');
+            });
 
-			describe( "Request Events", function(){
-				it( "fires on start", function(){
-					var event = execute( "main.onRequestStart" );
-				} );
+            describe('Request Events', function() {
+                it('fires on start', function() {
+                    var event = execute('main.onRequestStart');
+                });
 
-				it( "fires on end", function(){
-					var event = execute( "main.onRequestEnd" );
-				} );
-			} );
+                it('fires on end', function() {
+                    var event = execute('main.onRequestEnd');
+                });
+            });
 
-			describe( "Session Events", function(){
-				it( "fires on start", function(){
-					var event = execute( "main.onSessionStart" );
-				} );
+            describe('Session Events', function() {
+                it('fires on start', function() {
+                    var event = execute('main.onSessionStart');
+                });
 
-				it( "fires on end", function(){
-					// Place a fake session structure here, it mimics what the handler receives
-					URL.sessionReference     = structNew();
-					URL.applicationReference = structNew();
-					var event                = execute( "main.onSessionEnd" );
-				} );
-			} );
-		} );
-	}
+                it('fires on end', function() {
+                    // Place a fake session structure here, it mimics what the handler receives
+                    URL.sessionReference = structNew();
+                    URL.applicationReference = structNew();
+                    var event = execute('main.onSessionEnd');
+                });
+            });
+        });
+    }
 
 }

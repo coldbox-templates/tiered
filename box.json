@@ -1,10 +1,10 @@
 {
-    "name":"ColdBox Modern CFML Application Template",
-    "version":"8.4.0",
+    "name":"A tiered and structured starter template for ColdBox",
+    "version":"8.5.0",
     "author":"You",
-    "shortDescription":"A modern ColdBox CFML application template with best practices and tools integrated.",
+    "shortDescription":"A tiered and structured starter template for ColdBox",
     "location":"forgeboxStorage",
-    "slug":"cbtemplate-modern",
+    "slug":"cbtemplate-tiered",
     "createPackageDirectory":false,
     "type":"mvc",
     "keywords":[],
@@ -26,8 +26,7 @@
     "devDependencies":{
         "testbox":"*",
         "route-visualizer":"*",
-        "commandbox-boxlang":"*",
-        "commandbox-cfformat":"*"
+        "commandbox-boxlang":"*"
     },
     "installPaths":{
         "coldbox":"lib/coldbox/",
@@ -39,9 +38,8 @@
     },
     "scripts":{
         "postInstall":"pathExists .env || cp .env.example .env",
-        "format":"cfformat run app/,tests/specs/,*.cfc --overwrite --verbose",
-        "format:check":"cfformat check app/,tests/specs/,*.cfc ./.cfformat.json --verbose",
-        "format:watch":"cfformat watch path='app/**/*.cfc,tests/specs/,*.cfc' settingsPath='.cfformat.json'",
+        "format":"!boxlang format --source app/,tests/specs/,*.cfc",
+        "format:check":"!boxlang format --check --source app/,tests/specs/,*.cfc",
         "build:docker":"!docker build --no-cache -t my-coldbox-app -f ./docker/Dockerfile ./",
         "run:docker":"!docker run -it -p 8080:8080 my-coldbox-app"
     },
