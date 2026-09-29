@@ -1,6 +1,6 @@
 {
     "name":"A tiered and structured starter template for ColdBox",
-    "version":"8.5.0",
+    "version":"8.6.0",
     "author":"You",
     "shortDescription":"A tiered and structured starter template for ColdBox",
     "location":"forgeboxStorage",
@@ -21,7 +21,7 @@
         ".github/PULL_REQUEST_TEMPLATE.md"
     ],
     "dependencies":{
-        "coldbox":"^8.0.0"
+        "coldbox":"^8.2.0"
     },
     "devDependencies":{
         "testbox":"*",
