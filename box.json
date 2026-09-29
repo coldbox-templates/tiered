@@ -21,7 +21,7 @@
         ".github/PULL_REQUEST_TEMPLATE.md"
     ],
     "dependencies":{
-        "coldbox":"^8.0.0"
+        "coldbox":"^8.2.0"
     },
     "devDependencies":{
         "testbox":"*",
